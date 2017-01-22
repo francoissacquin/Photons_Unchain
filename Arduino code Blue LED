@@ -1,0 +1,19 @@
+const int led = 3;
+byte brightness = 0;
+//240
+void setup() {
+pinMode(led, OUTPUT);
+//Serial.begin(9600);
+}
+
+void loop() {
+//byte brightness = 0;
+
+analogWrite(led, brightness);
+
+//if (Serial.available()) {
+//  brightness = Serial.read();
+//  analogWrite(led, brightness);
+
+delay(30);
+}
