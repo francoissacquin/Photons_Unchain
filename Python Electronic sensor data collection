@@ -1,0 +1,17 @@
+import serial
+import csv
+ser = serial.Serial('/dev/ttyACM0', 2000000, timeout=2, xonxoff=False, rtscts=False, dsrdtr=False) 
+#This will link the python program to the serial of the arduino, remember to change the port number for it to work.
+ser.flushInput()
+ser.flushOutput()
+myfile = open('data_output.csv', 'a')
+#This will create an a csv.excel file to put the data somewhere, change the name of the file to fit your needs.
+wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+#This initializes the writer function and will later allow the program to write inside the file and not mess up the rows.
+mylist=[]
+#We create a list to gather up the data collection.
+for i in range(30): #Our arduino code took one measure per second so 30 measures meant 30 seconds of data.
+  data_raw = ser.readline()
+  print(data_raw) #Prints yoyur data in the python console to ensure everything's fine
+  mylist.append(data_raw)
+wr.writerow(mylist) #write the list inside the csv file
